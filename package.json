@@ -26,7 +26,12 @@
     "lint": "eslint --ext .ts src",
     "test": "vitest"
   },
-  "keywords": [],
+  "keywords": [
+    "hono",
+    "middleware",
+    "slack",
+    "typescript"
+  ],
   "author": "kitsuyaazuma <kitsuyaazuma@gmail.com>",
   "license": "MIT",
   "packageManager": "pnpm@10.10.0",
