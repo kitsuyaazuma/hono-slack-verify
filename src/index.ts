@@ -53,7 +53,7 @@ export const verifySlackRequest = () => {
     const isValid = await crypto.subtle.verify(
       "HMAC",
       key,
-      signatureBytes,
+      Buffer.from(signatureBytes),
       encoder.encode(baseString),
     );
     if (!isValid) {
