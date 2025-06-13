@@ -20,7 +20,7 @@ export const verifySlackRequest = () => {
     const signingSecret = c.env.SLACK_SIGNING_SECRET;
     if (!signingSecret) {
       throw new HTTPException(500, {
-        message: "SLACK_SIGNING_SECRET is not set",
+        message: "Slack signing secret is not set",
       });
     }
 
@@ -57,7 +57,7 @@ export const verifySlackRequest = () => {
       encoder.encode(baseString),
     );
     if (!isValid) {
-      throw new HTTPException(400, { message: "Invalid Slack signature" });
+      throw new HTTPException(401, { message: "Invalid Slack signature" });
     }
 
     await next();
