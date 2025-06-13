@@ -1,7 +1,7 @@
 {
   "name": "@kitsuyaazuma/hono-slack-verify",
   "version": "0.1.0",
-  "description": "",
+  "description": "A Hono middleware to verify requests from Slack",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
