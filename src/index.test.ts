@@ -200,4 +200,37 @@ describe("verifySlackRequest", () => {
     expect(res.status).toBe(401);
     expect(await res.text()).toEqual("Invalid Slack signature");
   });
+
+  it("Should pass the request for x-www-form-urlencoded if the signature is valid", async () => {
+    const app = new Hono();
+    app.use(verifySlackRequest());
+    app.post("/slack/interactive", (c) => c.json({ success: true }));
+
+    const urlencodedBody =
+      "payload=%7B%22type%22%3A%22block_actions%22%2C%22user%22%3A%7B%22id%22%3A%22U12345%22%7D%7D";
+
+    const timestamp = Math.floor(Date.now() / 1000);
+    const signature = await generateSignature(
+      SLACK_SIGNING_SECRET,
+      timestamp,
+      urlencodedBody,
+    );
+    const headers = new Headers({
+      "x-slack-signature": signature,
+      "x-slack-request-timestamp": String(timestamp),
+      "Content-Type": "application/x-www-form-urlencoded",
+    });
+
+    const res = await app.request(
+      "/slack/interactive",
+      {
+        method: "POST",
+        headers: headers,
+        body: urlencodedBody,
+      },
+      { SLACK_SIGNING_SECRET },
+    );
+    expect(res.status).toBe(200);
+    expect(await res.json()).toEqual({ success: true });
+  });
 });
