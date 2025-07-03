@@ -1,6 +1,6 @@
 # Slack Request Verification Middleware for Hono
 
-[![npm version](https://badge.fury.io/js/%40kitsuyaazuma%2Fhono-slack-verify.svg)](https://badge.fury.io/js/%40kitsuyaazuma%2Fhono-slack-verify)
+[![npm version](https://badge.fury.io/js/@kitsuyaazuma%2Fhono-slack-verify.svg)](https://badge.fury.io/js/@kitsuyaazuma%2Fhono-slack-verify)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 This is a middleware for [Hono](https://hono.dev) that verifies incoming requests from Slack. It ensures that requests genuinely originate from Slack by validating their signatures, as per [Slack's request verification guidelines](https://api.slack.com/authentication/verifying-requests-from-slack).
