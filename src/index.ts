@@ -26,7 +26,7 @@ export const verifySlackRequest = () => {
 
     const signatureHeader = c.req.header("x-slack-signature");
     const timestampHeader = c.req.header("x-slack-request-timestamp");
-    const body = await c.req.text();
+    const body = await c.req.raw.clone().text();
 
     if (!signatureHeader || !timestampHeader) {
       throw new HTTPException(400, {
@@ -53,7 +53,7 @@ export const verifySlackRequest = () => {
     const isValid = await crypto.subtle.verify(
       "HMAC",
       key,
-      Buffer.from(signatureBytes),
+      signatureBytes,
       encoder.encode(baseString),
     );
     if (!isValid) {
